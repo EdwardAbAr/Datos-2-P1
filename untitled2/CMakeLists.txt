@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
+set_source_files_properties(main.cpp PROPERTIES SKIP_AUTOMOC ON)
+
 
 # 👇 Ruta al cmake de Qt
 set(CMAKE_PREFIX_PATH "C:/Qt/6.9.2/mingw_64/lib/cmake")

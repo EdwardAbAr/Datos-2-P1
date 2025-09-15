@@ -41,14 +41,17 @@ target_link_libraries(MemoryProfiler_GUI Qt6::Widgets Qt6::Network Qt6::Charts)
 
 */
 
-#include <QtWidgets>
-#include <QtNetwork>
 #include <QtCharts>
+#include <QtNetwork>
+#include <QtWidgets>
 #include <unordered_map>
 #include <QtCharts/QChartView>
 #include <QtCharts/QLineSeries>
+#include <algorithm>
+#include <numeric>
 
-using namespace QtCharts;
+
+
 
 struct MemoryBlock {
     QString address;
@@ -298,7 +301,7 @@ private:
         }
         std::sort(items.begin(), items.end(), [](const QPair<QString,qint64>& a, const QPair<QString,qint64>& b){ return a.second > b.second; });
         topFilesModel->removeRows(0, topFilesModel->rowCount());
-        int limit = std::min(3, items.size());
+        int limit = std::min(3, static_cast<int>(items.size()));
         for (int i=0;i<limit;i++) {
             QList<QStandardItem*> row;
             row << new QStandardItem(items[i].first);
@@ -357,7 +360,12 @@ private:
         }
         lblLargestLeak->setText(largest > 0 ? QString("Leak más grande: %1 bytes (%2)").arg(largest).arg(largestAddr) : "Leak más grande: -");
         lblFileMostLeaks->setText(!fileMost.isEmpty() ? QString("Archivo con más leaks: %1 (%2)").arg(fileMost).arg(fileMostCount) : "Archivo con más leaks: -");
-        double leakRate = totalAllocations>0 ? (double)leaksByFileCount.values().sum() / (double)totalAllocations * 100.0 : 0.0;
+        double leakRate = 0.0;
+        if (totalAllocations > 0) {
+            auto values = leaksByFileCount.values(); // devuelve QList<int>
+            int sum = std::accumulate(values.begin(), values.end(), 0);
+            leakRate = (double)sum / (double)totalAllocations * 100.0;
+        }
         lblLeakRate->setText(QString("Tasa leaks: %1 %").arg(leakRate, 0, 'f', 2));
 
         // Bar chart rebuild
@@ -508,5 +516,6 @@ int main(int argc, char** argv) {
     w.show();
     return app.exec();
 }
+#include "main.moc"
 
 

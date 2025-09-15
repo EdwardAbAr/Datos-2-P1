@@ -1,14 +1,14 @@
-"C:\Cosas de la U\Idle\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Cosas de la U/Idle/CLion 2025.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_PREFIX_PATH=C:C:\Qt\6.9.2\mingw_64 -G Ninja -S C:\Users\edwar\CLionProjects\untitled2 -B C:\Users\edwar\CLionProjects\untitled2\cmake-build-debug
+"C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2025.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_C_COMPILER=C:/Qt/Tools/mingw1310_64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Qt/Tools/mingw1310_64/bin/g++.exe -G Ninja -S C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2 -B C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2\cmake-build-debug
 -- The C compiler identification is GNU 13.1.0
 -- The CXX compiler identification is GNU 13.1.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: C:/Cosas de la U/Idle/CLion 2025.2/bin/mingw/bin/gcc.exe - skipped
+-- Check for working C compiler: C:/Qt/Tools/mingw1310_64/bin/gcc.exe - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: C:/Cosas de la U/Idle/CLion 2025.2/bin/mingw/bin/g++.exe - skipped
+-- Check for working CXX compiler: C:/Qt/Tools/mingw1310_64/bin/g++.exe - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
 -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
@@ -19,6 +19,6 @@
 -- Found WrapAtomic: TRUE
 -- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
 -- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
--- Configuring done (3.4s)
--- Generating done (0.2s)
--- Build files have been written to: C:/Users/edwar/CLionProjects/untitled2/cmake-build-debug
+-- Configuring done (5.0s)
+-- Generating done (0.5s)
+-- Build files have been written to: C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug
