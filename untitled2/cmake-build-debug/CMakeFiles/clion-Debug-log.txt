@@ -1,11 +1,5 @@
-"C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2025.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_C_COMPILER=C:/Qt/Tools/mingw1310_64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Qt/Tools/mingw1310_64/bin/g++.exe -G Ninja -S C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2 -B C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2\cmake-build-debug
--- The C compiler identification is GNU 13.1.0
+"C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/JetBrains/CLion 2025.2/bin/ninja/win/x64/ninja.exe" -DCMAKE_C_COMPILER=C:/Qt/Tools/mingw1310_64/bin/gcc.exe -DCMAKE_CXX_COMPILER=C:/Qt/Tools/mingw1310_64/bin/g++.exe -DQt6Widgets_DIR=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Widgets -DCMAKE_PREFIX_PATH=C:/Qt/6.9.2/mingw_64/lib/cmake -DQt6_DIR=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6 -G Ninja -S C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2 -B C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2\cmake-build-debug
 -- The CXX compiler identification is GNU 13.1.0
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: C:/Qt/Tools/mingw1310_64/bin/gcc.exe - skipped
--- Detecting C compile features
--- Detecting C compile features - done
 -- Detecting CXX compiler ABI info
 -- Detecting CXX compiler ABI info - done
 -- Check for working CXX compiler: C:/Qt/Tools/mingw1310_64/bin/g++.exe - skipped
@@ -19,6 +13,12 @@
 -- Found WrapAtomic: TRUE
 -- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
 -- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
--- Configuring done (5.0s)
+-- Configuring done (3.2s)
 -- Generating done (0.5s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CMAKE_C_COMPILER
+
+
 -- Build files have been written to: C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug

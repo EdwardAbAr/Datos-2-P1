@@ -272,7 +272,7 @@ private:
 
         tabs->addTab(leaksTab, "Memory leaks");
     }
-
+//crea el servidor y abre el puerto para recibir los mensajes
     void setupServer() {
         server = new QTcpServer(this);
         connect(server, &QTcpServer::newConnection, this, &ProfilerWindow::onNewConnection);
