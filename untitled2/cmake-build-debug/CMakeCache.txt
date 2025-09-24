@@ -27,8 +27,8 @@ CMAKE_BUILD_TYPE:STRING=Debug
 //Enable colored diagnostics throughout.
 CMAKE_COLOR_DIAGNOSTICS:BOOL=ON
 
-//CXX compiler
-CMAKE_CXX_COMPILER:STRING=C:/Qt/Tools/mingw1310_64/bin/g++.exe
+//No help, variable specified on the command line.
+CMAKE_CXX_COMPILER:UNINITIALIZED=C:/Qt/Tools/mingw1310_64/bin/g++.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -174,9 +174,6 @@ CMAKE_OBJCOPY:FILEPATH=C:/Qt/Tools/mingw1310_64/bin/objcopy.exe
 
 //Path to a program.
 CMAKE_OBJDUMP:FILEPATH=C:/Qt/Tools/mingw1310_64/bin/objdump.exe
-
-//No help, variable specified on the command line.
-CMAKE_PREFIX_PATH:UNINITIALIZED=C:/Qt/6.9.2/mingw_64/lib/cmake
 
 //Value Computed by CMake
 CMAKE_PROJECT_DESCRIPTION:STATIC=
@@ -328,14 +325,14 @@ Qt6WidgetsPrivate_DIR:PATH=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6WidgetsPrivate
 //The directory containing a CMake configuration file for Qt6WidgetsTools.
 Qt6WidgetsTools_DIR:PATH=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6WidgetsTools
 
-//No help, variable specified on the command line.
-Qt6Widgets_DIR:UNINITIALIZED=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Widgets
+//The directory containing a CMake configuration file for Qt6Widgets.
+Qt6Widgets_DIR:PATH=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Widgets
 
 //The directory containing a CMake configuration file for Qt6ZlibPrivate.
 Qt6ZlibPrivate_DIR:PATH=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6ZlibPrivate
 
-//No help, variable specified on the command line.
-Qt6_DIR:UNINITIALIZED=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6
+//The directory containing a CMake configuration file for Qt6.
+Qt6_DIR:PATH=C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6
 
 //Path to a program.
 Vulkan_GLSLANG_VALIDATOR_EXECUTABLE:FILEPATH=Vulkan_GLSLANG_VALIDATOR_EXECUTABLE-NOTFOUND

@@ -1,4 +1,18 @@
 cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.25)
+project(untitled2_all LANGUAGES CXX)
+
+# Debug information
+set(CMAKE_PREFIX_PATH "C:/Qt/6.9.2/mingw_64")
+message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+message(STATUS "Looking for Qt6...")
+
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Charts)
+
+message(STATUS "Qt6_FOUND: ${Qt6_FOUND}")
+message(STATUS "Qt6_DIR: ${Qt6_DIR}")
+message(STATUS "Qt6Core_FOUND: ${Qt6Core_FOUND}")
+message(STATUS "Qt6Charts_FOUND: ${Qt6Charts_FOUND}")
 project(untitled2_all LANGUAGES CXX)
 
 # ===== Configuración C++ =====
@@ -35,6 +49,7 @@ endif()
 # ============================================
 # 2) Ejecutable de la UI (Qt)
 # ============================================
+set(Qt6_DIR "C:/Qt/6.9.2/mingw_64/lib/cmake/Qt6")
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Network Charts)
 
 add_executable(untitled2
