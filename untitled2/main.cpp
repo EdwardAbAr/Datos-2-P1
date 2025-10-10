@@ -1,46 +1,3 @@
-/*
-MemoryProfiler_GUI_qt.cpp
-Single-file Qt5/Qt6 example application that implements the GUI for the Memory
-Profiler project specified by the user.
-
-Dependencies:
- - Qt 5.12+ or Qt 6
- - Qt Widgets
- - Qt Network (QTcpServer/QTcpSocket)
- - Qt Charts (for timeline, pie, bar charts)
- - CMake (recommended) or qmake
-
-This file is a comprehensive starter implementation that provides:
- - A main window with the required tabs: Overview, Memory Map, By Source, Memory Leaks
- - A QTcpServer that listens for JSON messages from the instrumentation library
- - Data models (QStandardItemModel) to show tables and memory blocks
- - Charts for timeline, leaks distribution and bars using QtCharts
- - Hooks where the instrumentation JSON messages should be processed
-
-Notes / Limitations:
- - This is a GUI-only implementation. The C++ instrumentation library must be
-   implemented separately and send JSON messages (see sample messages below).
- - The code focuses on clarity and a real, runnable skeleton. You will likely
-   add performance improvements for big traces (e.g., incremental model updates,
-   virtual models, pagination).
-
-Sample JSON messages expected from the instrumentation library (over TCP):
-
-{"evento":"asignacion","direccion":"0x7ffee41b8","tamano":128,"archivo":"main.cpp","linea":42,"tipo":"int[]","timestamp":1694160000}
-
-{"evento":"liberacion","direccion":"0x7ffee41b8","timestamp":1694160005}
-
-{"evento":"snapshot","uso_actual_mb":12.5,"uso_max_mb":32.0,"total_asignaciones":1234,"timestamp":1694160010}
-
-Send each JSON line terminated by "\n". The GUI expects UTF-8 JSON per line.
-
-Build example (CMakeLists.txt snippet):
-find_package(Qt6 COMPONENTS Widgets Network Charts REQUIRED)
-add_executable(MemoryProfiler_GUI MemoryProfiler_GUI_qt.cpp)
-target_link_libraries(MemoryProfiler_GUI Qt6::Widgets Qt6::Network Qt6::Charts)
-
-*/
-
 #include <QtCharts>
 #include <QtNetwork>
 #include <QtWidgets>
@@ -145,10 +102,10 @@ private:
 
         // Top metrics
         QHBoxLayout* metricsLayout = new QHBoxLayout;
-        lblUsageMB = new QLabel("Uso actual: 0 MB");
+        lblUsageMB = new QLabel("Uso actual: 0 Bytes");
         lblActiveAllocs = new QLabel("Asignaciones activas: 0");
-        lblLeaksMB = new QLabel("MB en leaks: 0");
-        lblPeakMB = new QLabel("Uso máximo: 0 MB");
+        lblLeaksMB = new QLabel("Bytes en leaks: 0");
+        lblPeakMB = new QLabel("Uso máximo: 0 Bytes");
         lblTotalAllocs = new QLabel("Total asignaciones: 0");
         metricsLayout->addWidget(lblUsageMB);
         metricsLayout->addWidget(lblActiveAllocs);
@@ -168,7 +125,7 @@ private:
         timelineSeries->attachAxis(axisX);
         axisY = new QValueAxis;
         axisY->setLabelFormat("%.2f");
-        axisY->setTitleText("MB");
+        axisY->setTitleText("Bytes");
         timelineChart->addAxis(axisY, Qt::AlignLeft);
         timelineSeries->attachAxis(axisY);
         timelineChart->legend()->hide();
@@ -182,7 +139,7 @@ private:
         topFilesModel = new QStandardItemModel(0, 3, this);
         topFilesModel->setHeaderData(0, Qt::Horizontal, "Archivo");
         topFilesModel->setHeaderData(1, Qt::Horizontal, "Conteo");
-        topFilesModel->setHeaderData(2, Qt::Horizontal, "MB");
+        topFilesModel->setHeaderData(2, Qt::Horizontal, "Bytes");
         topFilesTable = new QTableView;
         topFilesTable->setModel(topFilesModel);
         topFilesTable->setMinimumHeight(200);
@@ -215,7 +172,7 @@ private:
         sourceModel = new QStandardItemModel(0, 3, this);
         sourceModel->setHeaderData(0, Qt::Horizontal, "Archivo");
         sourceModel->setHeaderData(1, Qt::Horizontal, "Conteo");
-        sourceModel->setHeaderData(2, Qt::Horizontal, "MB");
+        sourceModel->setHeaderData(2, Qt::Horizontal, "Bytes");
         sourceTable = new QTableView;
         sourceTable->setModel(sourceModel);
         sourceTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -228,7 +185,7 @@ private:
         QVBoxLayout* v = new QVBoxLayout(leaksTab);
 
         QHBoxLayout* top = new QHBoxLayout;
-        lblTotalLeaksMB = new QLabel("Total fugado: 0 MB");
+        lblTotalLeaksMB = new QLabel("Total fugado: 0 Bytes");
         lblLargestLeak = new QLabel("Leak más grande: -");
         lblFileMostLeaks = new QLabel("Archivo con más leaks: -");
         lblLeakRate = new QLabel("Tasa leaks: 0%");
@@ -260,6 +217,12 @@ private:
         QDateTimeAxis* dtAxis = new QDateTimeAxis;
         dtAxis->setFormat("hh:mm:ss");
         timeline->addAxis(dtAxis, Qt::AlignBottom);
+        leaksTimelineSeries->attachAxis(dtAxis);
+
+        QValueAxis* yAxis = new QValueAxis;
+        yAxis->setTitleText("Bytes");
+        timeline->addAxis(yAxis, Qt::AlignLeft);
+        leaksTimelineSeries->attachAxis(yAxis);
         leaksTimelineChartView = new QChartView(timeline);
         leaksTimelineChartView->setRenderHint(QPainter::Antialiasing);
         leaksTimelineChartView->setMinimumHeight(200);
@@ -272,7 +235,7 @@ private:
 
         tabs->addTab(leaksTab, "Memory leaks");
     }
-
+//crea el servidor y abre el puerto para recibir los mensajes
     void setupServer() {
         server = new QTcpServer(this);
         connect(server, &QTcpServer::newConnection, this, &ProfilerWindow::onNewConnection);
@@ -286,11 +249,13 @@ private:
 
     // Update UI helpers
     void updateMetricsLabels() {
-        lblUsageMB->setText(QString("Uso actual: %1 MB").arg(currentUsageMB, 0, 'f', 2));
+        lblUsageMB->setText(QString("Uso actual: %1 Bytes").arg(currentUsageMB, 0, 'f', 2));
         lblActiveAllocs->setText(QString("Asignaciones activas: %1").arg(blocks.size()));
-        lblLeaksMB->setText(QString("MB en leaks: %1").arg(totalLeakedMB));
+        lblLeaksMB->setText(QString("Bytes en leaks: %1").arg(totalLeakedMB));
         lblPeakMB->setText(QString("Uso máximo: %1 MB").arg(peakUsageMB, 0, 'f', 2));
         lblTotalAllocs->setText(QString("Total asignaciones: %1").arg(totalAllocations));
+        lblLeaksMB->setText(QString::number(totalLeakedMB, 'f', 3));
+        lblTotalLeaksMB->setText(QString::number(totalLeakedMB, 'f', 3));
     }
 
     void updateTopFiles() {
@@ -344,7 +309,7 @@ private:
 
     void updateLeaksCharts() {
         // Update labels
-        lblTotalLeaksMB->setText(QString("Total fugado: %1 MB").arg(totalLeakedMB));
+        lblTotalLeaksMB->setText(QString("Total fugado: %1 Bytes").arg(totalLeakedMB));
         // Largest leak and file with most leaks
         qint64 largest = 0; QString largestAddr;
         QString fileMost;
@@ -453,7 +418,7 @@ private slots:
             blocks[addr] = mb;
 
             // update aggregates
-            currentUsageMB += (double)size / (1024.0*1024.0);
+            currentUsageMB += (double)size;
             peakUsageMB = std::max(peakUsageMB, currentUsageMB);
             totalAllocations++;
             allocsByFileBytes[file] += size;
@@ -477,7 +442,7 @@ private slots:
                 MemoryBlock& mb = it->second;
                 if (!mb.freed) {
                     mb.freed = true;
-                    currentUsageMB -= (double)mb.size / (1024.0*1024.0);
+                    currentUsageMB -= (double)mb.size;
                     // update peak remains
                     // decrease allocsByFileBytes? keep history; for simplicity subtract
                     allocsByFileBytes[mb.file] -= mb.size;
@@ -488,21 +453,44 @@ private slots:
             updateMapModel();
             updateSourceModel();
         } else if (evento == "snapshot") {
-            // snapshot may include usage fields
-            double uso = obj.value("uso_actual_mb").toDouble();
-            double peak = obj.value("uso_max_mb").toDouble();
-            qint64 total = obj.value("total_asignaciones").toVariant().toLongLong();
-            currentUsageMB = uso; peakUsageMB = std::max(peakUsageMB, peak); totalAllocations = total;
-            timelineSeries->append(QDateTime::currentMSecsSinceEpoch(), currentUsageMB);
+            const bool hasUso  = obj.contains("uso_actual_mb") && obj.value("uso_actual_mb").isDouble();
+            const bool hasPeak = obj.contains("uso_max_mb")    && obj.value("uso_max_mb").isDouble();
+            const bool hasTot  = obj.contains("total_asignaciones");
+
+            const double uso   = obj.value("uso_actual_mb").toDouble(currentUsageMB);
+            const double peak  = obj.value("uso_max_mb").toDouble(peakUsageMB);
+            const qint64 total = static_cast<qint64>(obj.value("total_asignaciones").toDouble(totalAllocations));
+            const double fugas = obj.value("fugas_mb").toDouble(totalLeakedMB);
+            const double posibles = obj.value("posibles_fugas_mb").toDouble(uso);
+
+            // Solo pisa si realmente vino el campo y no es el típico 0 “ruidoso”
+            if (hasUso && uso > 1e-9) currentUsageMB = uso;
+            if (hasPeak)              peakUsageMB    = std::max(peakUsageMB, peak);
+            if (hasTot)               totalAllocations = total;
+            totalLeakedMB = fugas; // se queda igual si no viene
+
+            // Para la gráfica usa 'posibles' si viene, si no, el estado actual
+            const double y = obj.contains("posibles_fugas_mb") ? posibles : currentUsageMB;
+            const qint64 nowms = QDateTime::currentMSecsSinceEpoch();
+            timelineSeries->append(nowms, y);
+            axisX->setRange(QDateTime::fromMSecsSinceEpoch(nowms - 60000), QDateTime::fromMSecsSinceEpoch(nowms));
+            axisY->setRange(0, std::max<qreal>(axisY->max(), qreal(std::max(y, currentUsageMB) * 1.2)));
+
             updateMetricsLabels();
             updateTopFiles();
         } else if (evento == "leak_report") {
             // optional special message reporting detected leak
+            qDebug() << "LEAK REPORT RECEIVED:" << obj;
             QString addr = obj.value("direccion").toString();
             qint64 size = obj.value("tamano").toVariant().toLongLong();
             QString file = obj.value("archivo").toString();
-            totalLeakedMB += size / (1024.0*1024.0);
+            qDebug() << "  Address:" << addr;
+            qDebug() << "  Size:" << size;
+            qDebug() << "  File:" << file;
+            totalLeakedMB += size;
             leaksByFileCount[file]++;
+            qDebug() << "  totalLeakedMB now:" << totalLeakedMB;
+            qDebug() << "  leaksByFileCount[" << file << "] =" << leaksByFileCount[file];
             updateLeaksCharts();
             updateMetricsLabels();
         }

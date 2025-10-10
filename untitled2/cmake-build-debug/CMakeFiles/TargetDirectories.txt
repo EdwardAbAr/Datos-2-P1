@@ -1,5 +1,14 @@
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/profiler.dir
 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/untitled2.dir
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo0.dir
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo1.dir
 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/profiler_autogen_timestamp_deps.dir
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/profiler_autogen.dir
 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/untitled2_autogen_timestamp_deps.dir
 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/untitled2_autogen.dir
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo0_autogen_timestamp_deps.dir
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo0_autogen.dir
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo1_autogen_timestamp_deps.dir
+C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo1_autogen.dir
