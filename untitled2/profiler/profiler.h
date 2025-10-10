@@ -16,16 +16,18 @@ namespace profiler {
 
     //nos va a ayudar a saber de que función y en cual linea estamos analizando la memoria
     #define NEW(T, ...)( new (__FILE__, __LINE__, #T) T(__VA_ARGS__) )
+    #define NEW_ARRAY(T, N) new (__FILE__, __LINE__, #T "[]") T[(N)]
+
 
 
 }
 
 //sobrecargas de los operadores
 void *operator new[](size_t size);
-
 void* operator new(size_t size);
 void operator delete[](void *p) noexcept; //noexcept ayuda a que la función no tenga excepciones y en caso de tenerla entonces la termina
 void operator delete (void* p) noexcept;
 
 //esto es utilizado por NEW para saber la linea, archivo y tipo que se analiza
 void* operator new(size_t n, const char* file, int line, const char* type);
+void* operator new[](size_t n, const char* file, int line, const char* type);

@@ -31,7 +31,7 @@ set(CMAKE_AUTORCC ON)
 add_library(profiler STATIC
         profiler/profiler.cpp
         profiler/profiler_socket.cpp
-        demo/demo.cpp
+        demo/demo0.cpp
 )
 
 target_include_directories(profiler PUBLIC
@@ -137,9 +137,20 @@ target_compile_definitions(untitled2 PRIVATE
 # ============================================
 # 4) (Opcional) Demo que linkea profiler
 # ============================================
- if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/demo/demo.cpp")
-     add_executable(demo demo/demo.cpp)
-     target_link_libraries(demo PRIVATE profiler)
-     target_include_directories(demo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/profiler)
- endif()
+ #if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/demo/demo.cpp")
+ #    add_executable(demo demo/demo.cpp)
+ #    target_link_libraries(demo PRIVATE profiler)
+ #    target_include_directories(demo PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/profiler)
+ #endif()
+
+function(add_profiler_demo name)
+    add_executable(${name} demo/${name}.cpp)
+    target_link_libraries(${name} PRIVATE profiler)
+    target_include_directories(${name} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/profiler)
+endfunction()
+
+add_profiler_demo(demo0)
+add_profiler_demo(demo1)
+#add_profiler_demo(demo3)
+
 

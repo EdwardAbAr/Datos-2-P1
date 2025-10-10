@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <string>
 #include <cstdlib>
+#include <iostream>
 #include <new>
 
 namespace profiler {
@@ -119,7 +120,7 @@ namespace profiler {
          *sumamos el mismo valor para asegurarnos de leerlo bien luego
          la suma se hace porque otro hilo puede actualizar este valor
          */
-        double usage= m_usageMB.fetch_add(static_cast<double>(n)/1000000.0) + static_cast<double>(n)/1000000.0;
+        double usage= m_usageMB.fetch_add(static_cast<double>(n)) + static_cast<double>(n);
         double prev=m_peakMB.load(); //obtenemos el pico de mamoria actual
         /*comparamos el uso actual con el historico
          * el ciclo se mantiene hasta que logra actualizar el valor del pico de memoria
@@ -188,11 +189,19 @@ namespace profiler {
 
     static void leak_report() {
         long long bytes_leaked=0;
+        int leak_count=0;
+        std::vector<std::string> to_send;
         {
             std::lock_guard<std::mutex> lk(mutex);
+            std::cout << "=== LEAK REPORT START ===" << std::endl;
+            std::cout << "Total blocks tracked: " << m_blocks.size() << std::endl;
             for (auto& kv: m_blocks) {
                 Memory_Block& block = kv.second; //obtenemos la dirección en memoria
+                std::cout << "Block: addr=" << block.addr
+                     << " freed=" << block.freed
+                     << " size=" << block.size << std::endl;
                 if (!block.freed) {
+                    leak_count++;
                     bytes_leaked+=static_cast<long long>(block.size);
                     m_leaksCountByFile[block.file]++;
 
@@ -201,16 +210,23 @@ namespace profiler {
                        "\",\"tamano\":" + std::to_string(block.size) +
                        ",\"archivo\":\"" + escape_json(block.file) +
                        "\",\"timestamp\":" + std::to_string(now_ms()) + "}";
-                    send_line(std::move(message));
+                    std::cout << "Sending leak message: " << message << std::endl;
+                    //send_line(std::move(message));
+                    to_send.push_back(std::move(message));
                 }
             }
+            m_totalLeaksBytes.store(bytes_leaked);
         }
-        m_totalLeaksBytes.store(bytes_leaked);
+
+        for (auto& s : to_send) send_line(s );
         std::string snap = "{\"evento\":\"snapshot\",\"uso_actual_mb\":" + std::to_string(m_usageMB.load()) +
                      ",\"uso_max_mb\":" + std::to_string(m_peakMB.load()) +
                      ",\"total_asignaciones\":" + std::to_string(m_totalAllocs.load()) +
+                     ",\"fugas_mb\":" + std:: to_string(m_totalLeaksBytes.load()) +
                      ",\"timestamp\":" + std::to_string(now_ms()) + "}";
+        std::cout << "Sending final snapshot: " << snap << std::endl;
         send_line(std::move(snap));
+        std::cout << "=== LEAK REPORT END ===" << std::endl;
     }
 
     static void snap_thread() {
@@ -219,6 +235,7 @@ namespace profiler {
             std::string message = "{\"evento\":\"snapshot\",\"uso_actual_mb\":" + std::to_string(m_usageMB.load()) +
                     ",\"uso_max_mb\":" + std::to_string(m_peakMB.load()) +
                     ",\"total_asignaciones\":" + std::to_string(m_totalAllocs.load()) +
+                        ",\"fugas_mb\":" + std:: to_string(m_totalLeaksBytes.load()) +
                     ",\"timestamp\":" + std::to_string(now_ms()) + "}";
             send_line(std::move(message));
             std::this_thread::sleep_for(800ms); //asegura que sea periodico
@@ -242,29 +259,54 @@ namespace profiler {
         std::string j = "{\"evento\":\"snapshot\",\"uso_actual_mb\":" + std::to_string(m_usageMB.load()) +
                         ",\"uso_max_mb\":" + std::to_string(m_peakMB.load()) +
                         ",\"total_asignaciones\":" + std::to_string(m_totalAllocs.load()) +
+                        ",\"fugas_mb\":" + std:: to_string(m_totalLeaksBytes.load()) +
                         ",\"timestamp\":" + std::to_string(now_ms()) + "}";
-        send_line(std::move(j));                          // Enviar snapshot.
+        send_line(std::move(j));// Enviar snapshot.
     }
 
     void shutdown() {
-        if (!m_inited.load()) return;// Si nunca se inició, nada que hacer.
-        //señala al hilo de snapshots que se detenga
-        if (m_runSnapshots.exchange(false)) {
-            if (m_snapThread.joinable()) m_snapThread.join();
+        std::cout << ">>> shutdown() CALLED <<<" << std::endl;
+        if (!m_inited.load()){
+            std::cout << ">>> shutdown() ABORTED - not initialized <<<" << std::endl;
+            return;
         }
-        leak_report();//reporta fugas restantes y snapshot final.
+            // Si nunca se inició, nada que hacer.
+        //señala al hilo de snapshots que se detenga
+        std::cout << ">>> Stopping snapshots thread..." << std::endl;
+        if (m_runSnapshots.exchange(false)) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(900));
+            if (m_snapThread.joinable()) {
+                // Detach instead of join to avoid deadlock
+                m_snapThread.detach();
+            }
+        }
+        std::cout << ">>> Calling leak_report()..." << std::endl;
+        leak_report();
+
+        std::cout << ">>> Sleeping for 1 second..." << std::endl;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+
+        std::cout << ">>> Stopping client..." << std::endl;
+        m_client.stop();
+
+        std::cout << ">>> Setting m_inited to false..." << std::endl;
+        m_inited.store(false);
+
+        std::cout << ">>> shutdown() COMPLETE <<<" << std::endl;
+        /*leak_report();//reporta fugas restantes y snapshot final.
+        std::this_thread::sleep_for(std::chrono::seconds(5));
         m_client.stop();//detiene los sockets.
-        m_inited.store(false);//marca sistema como no inicializado.
+        m_inited.store(false);//marca sistema como no inicializado.*/
     }
 
 }
 using namespace profiler;
 void* operator new(std::size_t n) {
     if (!profiler::m_inited.load()) profiler::init();
-    if (profiler::th_guard) return std::malloc(n);//si esta dentro del guard, delega directo a malloc
-    profiler::th_guard = true; //activa el guard para evitar la recursión
+    //if (profiler::th_guard) return std::malloc(n);//si esta dentro del guard, delega directo a malloc
+    //profiler::th_guard = true; //activa el guard para evitar la recursión
     void* p = std::malloc(n);//asignación real con malloc
-    profiler::th_guard = false;
+    //profiler::th_guard = false;
     if (!p) throw std::bad_alloc();//propaga fallo estándar
     profiler::on_alloc(p, n, "", 0, "unknown"); // registra asignación sin info de archivo/línea
     return p;//devuelve puntero.
@@ -272,7 +314,7 @@ void* operator new(std::size_t n) {
 
 void  operator delete(void* p) noexcept {
   if (!p) return;//si el puntero es nulo no hay que devolver
-  if (profiler::th_guard) { std::free(p); return; }
+  //if (profiler::th_guard) { std::free(p); return; }
   profiler::on_free(p);//registra la liberación
   std::free(p);//libera el espacio
 }
@@ -290,19 +332,30 @@ void* operator new[](std::size_t n) {
 
 void  operator delete[](void* p) noexcept {
   if (!p) return;
-  if (profiler::th_guard) { std::free(p); return; }
+  //if (profiler::th_guard) { std::free(p); return; }
   profiler::on_free(p);
   std::free(p);
 }
 
 void* operator new(std::size_t n, const char* file, int line, const char* type) {
   if (!profiler::m_inited.load())profiler::init();
-  if (profiler::th_guard) return std::malloc(n);
-  profiler::th_guard = true;
+  //if (profiler::th_guard) return std::malloc(n);
+  //profiler::th_guard = true;
   void* p = std::malloc(n);
-  profiler::th_guard = false;
+  //profiler::th_guard = false;
   if (!p) throw std::bad_alloc();
   profiler::on_alloc(p, n, file, line, type ? type : "unknown");
   return p;
 }
+void* operator new[](std::size_t n, const char* file, int line, const char* type) {
+    if (!profiler::m_inited.load()) profiler::init();
+    //if (profiler::th_guard) return std::malloc(n);
+    //profiler::th_guard = true;
+    void* p = std::malloc(n);
+   //profiler::th_guard = false;
+    if (!p) throw std::bad_alloc();
+    profiler::on_alloc(p, n, file, line, type ? type : "array");
+    return p;
+}
+
 

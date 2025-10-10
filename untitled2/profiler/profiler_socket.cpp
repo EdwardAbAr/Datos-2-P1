@@ -24,6 +24,9 @@ namespace profiler {
 
     void SocketClient::stop() {
         if (!run_.exchange(false))return; //si ya estaba detenido entonces no hace nada
+        for(int i=0; i<10 && !queue.empty(); i++) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
         if (th_.joinable())th_.join(); //espera a que el hilo termine sus tareas y luego lo cierra
         close_socket();
     }

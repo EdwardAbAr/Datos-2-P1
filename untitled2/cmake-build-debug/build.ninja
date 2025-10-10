@@ -76,10 +76,10 @@ build CMakeFiles/profiler.dir/profiler/profiler_socket.cpp.obj: CXX_COMPILER__pr
   OBJECT_DIR = CMakeFiles\profiler.dir
   OBJECT_FILE_DIR = CMakeFiles\profiler.dir\profiler
 
-build CMakeFiles/profiler.dir/demo/demo.cpp.obj: CXX_COMPILER__profiler_unscanned_Debug C$:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/demo/demo.cpp || cmake_object_order_depends_target_profiler
+build CMakeFiles/profiler.dir/demo/demo0.cpp.obj: CXX_COMPILER__profiler_unscanned_Debug C$:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/demo/demo0.cpp || cmake_object_order_depends_target_profiler
   CONFIG = Debug
   DEFINES = -DNOMINMAX -DWIN32_LEAN_AND_MEAN
-  DEP_FILE = CMakeFiles\profiler.dir\demo\demo.cpp.obj.d
+  DEP_FILE = CMakeFiles\profiler.dir\demo\demo0.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
   INCLUDES = -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/profiler_autogen/include -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/profiler
   OBJECT_DIR = CMakeFiles\profiler.dir
@@ -93,7 +93,7 @@ build CMakeFiles/profiler.dir/demo/demo.cpp.obj: CXX_COMPILER__profiler_unscanne
 #############################################
 # Link the static library libprofiler.a
 
-build libprofiler.a: CXX_STATIC_LIBRARY_LINKER__profiler_Debug CMakeFiles/profiler.dir/profiler_autogen/mocs_compilation.cpp.obj CMakeFiles/profiler.dir/profiler/profiler.cpp.obj CMakeFiles/profiler.dir/profiler/profiler_socket.cpp.obj CMakeFiles/profiler.dir/demo/demo.cpp.obj || profiler_autogen profiler_autogen_timestamp_deps
+build libprofiler.a: CXX_STATIC_LIBRARY_LINKER__profiler_Debug CMakeFiles/profiler.dir/profiler_autogen/mocs_compilation.cpp.obj CMakeFiles/profiler.dir/profiler/profiler.cpp.obj CMakeFiles/profiler.dir/profiler/profiler_socket.cpp.obj CMakeFiles/profiler.dir/demo/demo0.cpp.obj || profiler_autogen profiler_autogen_timestamp_deps
   CONFIG = Debug
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles\profiler.dir
@@ -149,50 +149,96 @@ build untitled2.exe: CXX_EXECUTABLE_LINKER__untitled2_Debug CMakeFiles/untitled2
   TARGET_PDB = untitled2.exe.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target demo
+# Object build statements for EXECUTABLE target demo0
 
 
 #############################################
-# Order-only phony target for demo
+# Order-only phony target for demo0
 
-build cmake_object_order_depends_target_demo: phony || cmake_object_order_depends_target_profiler demo_autogen demo_autogen/mocs_compilation.cpp demo_autogen/timestamp demo_autogen_timestamp_deps
+build cmake_object_order_depends_target_demo0: phony || cmake_object_order_depends_target_profiler demo0_autogen demo0_autogen/mocs_compilation.cpp demo0_autogen/timestamp demo0_autogen_timestamp_deps
 
-build CMakeFiles/demo.dir/demo_autogen/mocs_compilation.cpp.obj: CXX_COMPILER__demo_unscanned_Debug C$:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_demo
+build CMakeFiles/demo0.dir/demo0_autogen/mocs_compilation.cpp.obj: CXX_COMPILER__demo0_unscanned_Debug C$:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo0_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_demo0
   CONFIG = Debug
   DEFINES = -DNOMINMAX -DWIN32_LEAN_AND_MEAN
-  DEP_FILE = CMakeFiles\demo.dir\demo_autogen\mocs_compilation.cpp.obj.d
+  DEP_FILE = CMakeFiles\demo0.dir\demo0_autogen\mocs_compilation.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo_autogen/include -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/profiler
-  OBJECT_DIR = CMakeFiles\demo.dir
-  OBJECT_FILE_DIR = CMakeFiles\demo.dir\demo_autogen
+  INCLUDES = -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo0_autogen/include -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/profiler
+  OBJECT_DIR = CMakeFiles\demo0.dir
+  OBJECT_FILE_DIR = CMakeFiles\demo0.dir\demo0_autogen
 
-build CMakeFiles/demo.dir/demo/demo.cpp.obj: CXX_COMPILER__demo_unscanned_Debug C$:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/demo/demo.cpp || cmake_object_order_depends_target_demo
+build CMakeFiles/demo0.dir/demo/demo0.cpp.obj: CXX_COMPILER__demo0_unscanned_Debug C$:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/demo/demo0.cpp || cmake_object_order_depends_target_demo0
   CONFIG = Debug
   DEFINES = -DNOMINMAX -DWIN32_LEAN_AND_MEAN
-  DEP_FILE = CMakeFiles\demo.dir\demo\demo.cpp.obj.d
+  DEP_FILE = CMakeFiles\demo0.dir\demo\demo0.cpp.obj.d
   FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo_autogen/include -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/profiler
-  OBJECT_DIR = CMakeFiles\demo.dir
-  OBJECT_FILE_DIR = CMakeFiles\demo.dir\demo
+  INCLUDES = -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo0_autogen/include -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/profiler
+  OBJECT_DIR = CMakeFiles\demo0.dir
+  OBJECT_FILE_DIR = CMakeFiles\demo0.dir\demo
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target demo
+# Link build statements for EXECUTABLE target demo0
 
 
 #############################################
-# Link the executable demo.exe
+# Link the executable demo0.exe
 
-build demo.exe: CXX_EXECUTABLE_LINKER__demo_Debug CMakeFiles/demo.dir/demo_autogen/mocs_compilation.cpp.obj CMakeFiles/demo.dir/demo/demo.cpp.obj | libprofiler.a || demo_autogen demo_autogen_timestamp_deps libprofiler.a
+build demo0.exe: CXX_EXECUTABLE_LINKER__demo0_Debug CMakeFiles/demo0.dir/demo0_autogen/mocs_compilation.cpp.obj CMakeFiles/demo0.dir/demo/demo0.cpp.obj | libprofiler.a || demo0_autogen demo0_autogen_timestamp_deps libprofiler.a
   CONFIG = Debug
   FLAGS = -g
   LINK_LIBRARIES = libprofiler.a  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\demo.dir
+  OBJECT_DIR = CMakeFiles\demo0.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = demo.exe
-  TARGET_IMPLIB = libdemo.dll.a
-  TARGET_PDB = demo.exe.dbg
+  TARGET_FILE = demo0.exe
+  TARGET_IMPLIB = libdemo0.dll.a
+  TARGET_PDB = demo0.exe.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target demo1
+
+
+#############################################
+# Order-only phony target for demo1
+
+build cmake_object_order_depends_target_demo1: phony || cmake_object_order_depends_target_profiler demo1_autogen demo1_autogen/mocs_compilation.cpp demo1_autogen/timestamp demo1_autogen_timestamp_deps
+
+build CMakeFiles/demo1.dir/demo1_autogen/mocs_compilation.cpp.obj: CXX_COMPILER__demo1_unscanned_Debug C$:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo1_autogen/mocs_compilation.cpp || cmake_object_order_depends_target_demo1
+  CONFIG = Debug
+  DEFINES = -DNOMINMAX -DWIN32_LEAN_AND_MEAN
+  DEP_FILE = CMakeFiles\demo1.dir\demo1_autogen\mocs_compilation.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo1_autogen/include -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/profiler
+  OBJECT_DIR = CMakeFiles\demo1.dir
+  OBJECT_FILE_DIR = CMakeFiles\demo1.dir\demo1_autogen
+
+build CMakeFiles/demo1.dir/demo/demo1.cpp.obj: CXX_COMPILER__demo1_unscanned_Debug C$:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/demo/demo1.cpp || cmake_object_order_depends_target_demo1
+  CONFIG = Debug
+  DEFINES = -DNOMINMAX -DWIN32_LEAN_AND_MEAN
+  DEP_FILE = CMakeFiles\demo1.dir\demo\demo1.cpp.obj.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo1_autogen/include -IC:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/profiler
+  OBJECT_DIR = CMakeFiles\demo1.dir
+  OBJECT_FILE_DIR = CMakeFiles\demo1.dir\demo
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target demo1
+
+
+#############################################
+# Link the executable demo1.exe
+
+build demo1.exe: CXX_EXECUTABLE_LINKER__demo1_Debug CMakeFiles/demo1.dir/demo1_autogen/mocs_compilation.cpp.obj CMakeFiles/demo1.dir/demo/demo1.cpp.obj | libprofiler.a || demo1_autogen demo1_autogen_timestamp_deps libprofiler.a
+  CONFIG = Debug
+  FLAGS = -g
+  LINK_LIBRARIES = libprofiler.a  -lws2_32  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
+  OBJECT_DIR = CMakeFiles\demo1.dir
+  POST_BUILD = cd .
+  PRE_LINK = cd .
+  TARGET_FILE = demo1.exe
+  TARGET_IMPLIB = libdemo1.dll.a
+  TARGET_PDB = demo1.exe.dbg
 
 
 #############################################
@@ -243,15 +289,27 @@ build untitled2_autogen: phony CMakeFiles/untitled2_autogen untitled2_autogen/ti
 
 
 #############################################
-# Utility command for demo_autogen_timestamp_deps
+# Utility command for demo0_autogen_timestamp_deps
 
-build demo_autogen_timestamp_deps: phony libprofiler.a
+build demo0_autogen_timestamp_deps: phony libprofiler.a
 
 
 #############################################
-# Utility command for demo_autogen
+# Utility command for demo0_autogen
 
-build demo_autogen: phony CMakeFiles/demo_autogen demo_autogen/timestamp demo_autogen/mocs_compilation.cpp demo_autogen_timestamp_deps
+build demo0_autogen: phony CMakeFiles/demo0_autogen demo0_autogen/timestamp demo0_autogen/mocs_compilation.cpp demo0_autogen_timestamp_deps
+
+
+#############################################
+# Utility command for demo1_autogen_timestamp_deps
+
+build demo1_autogen_timestamp_deps: phony libprofiler.a
+
+
+#############################################
+# Utility command for demo1_autogen
+
+build demo1_autogen: phony CMakeFiles/demo1_autogen demo1_autogen/timestamp demo1_autogen/mocs_compilation.cpp demo1_autogen_timestamp_deps
 
 
 #############################################
@@ -277,12 +335,23 @@ build untitled2_autogen/timestamp untitled2_autogen/mocs_compilation.cpp | ${cma
 
 
 #############################################
-# Custom command for demo_autogen\timestamp
+# Custom command for demo0_autogen\timestamp
 
-build demo_autogen/timestamp demo_autogen/mocs_compilation.cpp | ${cmake_ninja_workdir}demo_autogen/timestamp ${cmake_ninja_workdir}demo_autogen/mocs_compilation.cpp: CUSTOM_COMMAND C$:/Qt/6.9.2/mingw_64/bin/moc.exe C$:/Qt/6.9.2/mingw_64/bin/uic.exe || demo_autogen_timestamp_deps libprofiler.a profiler_autogen profiler_autogen_timestamp_deps
-  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E cmake_autogen C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo_autogen.dir/AutogenInfo.json Debug && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E touch C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo_autogen/timestamp && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E cmake_transform_depfile Ninja gccdepfile C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo_autogen/deps C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/d/7881fd18e84283b4878f5369db41faaa7db707562891a11daf572e3694cbd924.d"
-  DESC = Automatic MOC and UIC for target demo
-  depfile = CMakeFiles\d\7881fd18e84283b4878f5369db41faaa7db707562891a11daf572e3694cbd924.d
+build demo0_autogen/timestamp demo0_autogen/mocs_compilation.cpp | ${cmake_ninja_workdir}demo0_autogen/timestamp ${cmake_ninja_workdir}demo0_autogen/mocs_compilation.cpp: CUSTOM_COMMAND C$:/Qt/6.9.2/mingw_64/bin/moc.exe C$:/Qt/6.9.2/mingw_64/bin/uic.exe || demo0_autogen_timestamp_deps libprofiler.a profiler_autogen profiler_autogen_timestamp_deps
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E cmake_autogen C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo0_autogen.dir/AutogenInfo.json Debug && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E touch C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo0_autogen/timestamp && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E cmake_transform_depfile Ninja gccdepfile C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo0_autogen/deps C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/d/fb9fb678bf0b262daf2386bfcfdf8e6f68be0db9c061241765b31bd9b2a371a9.d"
+  DESC = Automatic MOC and UIC for target demo0
+  depfile = CMakeFiles\d\fb9fb678bf0b262daf2386bfcfdf8e6f68be0db9c061241765b31bd9b2a371a9.d
+  deps = gcc
+  restat = 1
+
+
+#############################################
+# Custom command for demo1_autogen\timestamp
+
+build demo1_autogen/timestamp demo1_autogen/mocs_compilation.cpp | ${cmake_ninja_workdir}demo1_autogen/timestamp ${cmake_ninja_workdir}demo1_autogen/mocs_compilation.cpp: CUSTOM_COMMAND C$:/Qt/6.9.2/mingw_64/bin/moc.exe C$:/Qt/6.9.2/mingw_64/bin/uic.exe || demo1_autogen_timestamp_deps libprofiler.a profiler_autogen profiler_autogen_timestamp_deps
+  COMMAND = C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\dylan\CLionProjects\Datos-2-P1\untitled2\cmake-build-debug && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E cmake_autogen C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/demo1_autogen.dir/AutogenInfo.json Debug && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E touch C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo1_autogen/timestamp && "C:\Program Files\JetBrains\CLion 2025.2\bin\cmake\win\x64\bin\cmake.exe" -E cmake_transform_depfile Ninja gccdepfile C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2 C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/demo1_autogen/deps C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug/CMakeFiles/d/2e4d65f2d1457337f537727064ad5c336df5bfd69c26c717c3063c456cdda791.d"
+  DESC = Automatic MOC and UIC for target demo1
+  depfile = CMakeFiles\d\2e4d65f2d1457337f537727064ad5c336df5bfd69c26c717c3063c456cdda791.d
   deps = gcc
   restat = 1
 
@@ -300,14 +369,22 @@ build CMakeFiles/untitled2_autogen | ${cmake_ninja_workdir}CMakeFiles/untitled2_
 
 
 #############################################
-# Phony custom command for CMakeFiles\demo_autogen
+# Phony custom command for CMakeFiles\demo0_autogen
 
-build CMakeFiles/demo_autogen | ${cmake_ninja_workdir}CMakeFiles/demo_autogen: phony demo_autogen/timestamp || demo_autogen_timestamp_deps libprofiler.a profiler_autogen profiler_autogen_timestamp_deps
+build CMakeFiles/demo0_autogen | ${cmake_ninja_workdir}CMakeFiles/demo0_autogen: phony demo0_autogen/timestamp || demo0_autogen_timestamp_deps libprofiler.a profiler_autogen profiler_autogen_timestamp_deps
+
+
+#############################################
+# Phony custom command for CMakeFiles\demo1_autogen
+
+build CMakeFiles/demo1_autogen | ${cmake_ninja_workdir}CMakeFiles/demo1_autogen: phony demo1_autogen/timestamp || demo1_autogen_timestamp_deps libprofiler.a profiler_autogen profiler_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.
 
-build demo: phony demo.exe
+build demo0: phony demo0.exe
+
+build demo1: phony demo1.exe
 
 build profiler: phony libprofiler.a
 
@@ -321,7 +398,7 @@ build untitled2: phony untitled2.exe
 #############################################
 # Folder: C:/Users/dylan/CLionProjects/Datos-2-P1/untitled2/cmake-build-debug
 
-build all: phony libprofiler.a untitled2.exe demo.exe
+build all: phony libprofiler.a untitled2.exe demo0.exe demo1.exe
 
 # =============================================================================
 # Built-in targets
